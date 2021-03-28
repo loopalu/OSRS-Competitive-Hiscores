@@ -27,7 +27,13 @@ public class HiscoresAPIController {
             "Cleaning DEF",
             "ToneDef",
             "Moon Trixx",
-            "Pusebo"
+            "Pusebo",
+            "Def Brif",
+            "fl",
+            "LeadSpade",
+            "Lee Adama",
+            "rol u",
+            "Using Lamps"
     ));
 
     //TODO: input should get also the skill name by which the comparision should be done
