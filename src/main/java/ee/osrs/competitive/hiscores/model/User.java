@@ -1,8 +1,7 @@
-package com.example.demo;
+package ee.osrs.competitive.hiscores.model;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
