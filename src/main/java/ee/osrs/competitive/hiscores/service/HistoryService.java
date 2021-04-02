@@ -14,11 +14,16 @@ public class HistoryService {
 
     private User getUser(String userName) {
         String metaData = restService.getUserMetaData(userName);
-        return new User(metaData, userName);
+        try {
+            return new User(metaData, userName);
+        } catch (java.lang.NumberFormatException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     //TODO: make API work with any skill not only Defence.
-    private void sortUsersBySkill(ArrayList<User> users) {
+    private void sortUsersByDefence(ArrayList<User> users) {
         users.sort((User user1, User user2) -> {
             if (user1.getDefence() > user2.getDefence())
                 return -1;
@@ -32,13 +37,30 @@ public class HistoryService {
         });
     }
 
+    private void sortUsersByTotal(ArrayList<User> users) {
+        users.sort((User user1, User user2) -> {
+            if (user1.getTotalLevel() > user2.getTotalLevel())
+                return -1;
+            if (user1.getTotalLevel() < user2.getTotalLevel())
+                return 1;
+            if (user1.getTotalLevelExp() > user2.getTotalLevelExp())
+                return -1;
+            if (user1.getTotalLevelExp() < user2.getTotalLevelExp())
+                return 1;
+            return 0;
+        });
+    }
+
     //TODO: make API work with any skill not only Defence.
     public String getHiScores(ArrayList<String> names) {
         ArrayList<User> users = new ArrayList<>();
         for (String name: names) {
-            users.add(getUser(name));
+            User user = getUser(name);
+            if (user != null) {
+                users.add(getUser(name));
+            }
         }
-        sortUsersBySkill(users);
+        sortUsersByDefence(users);
 
         StringBuilder output = new StringBuilder();
 

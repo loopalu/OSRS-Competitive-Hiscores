@@ -33,7 +33,8 @@ public class HiscoresAPIController {
             "LeadSpade",
             "Lee Adama",
             "rol u",
-            "Using Lamps"
+            "Using Lamps",
+            "Flopsy"
     ));
 
     //TODO: input should get also the skill name by which the comparision should be done
