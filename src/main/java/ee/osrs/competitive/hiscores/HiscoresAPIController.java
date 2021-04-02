@@ -20,8 +20,7 @@ public class HiscoresAPIController {
     //TODO: make API work with input in JSON format
     private final ArrayList<String> names = new ArrayList<>(Arrays.asList(
             "Y0u Are Y0u",
-            "Tankago",
-            "H4RF",
+            "An Optician",
             "204 exp left",
             "The God Fate",
             "Cleaning DEF",
@@ -34,7 +33,8 @@ public class HiscoresAPIController {
             "Lee Adama",
             "rol u",
             "Using Lamps",
-            "Flopsy"
+            "Flopsy",
+            "Pogxy"
     ));
 
     //TODO: input should get also the skill name by which the comparision should be done

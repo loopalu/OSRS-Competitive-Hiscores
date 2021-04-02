@@ -16,8 +16,8 @@ public class HistoryService {
         String metaData = restService.getUserMetaData(userName);
         try {
             return new User(metaData, userName);
-        } catch (java.lang.NumberFormatException e) {
-            System.out.println(e);
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println(exception);
             return null;
         }
     }
