@@ -34,7 +34,9 @@ public class HiscoresAPIController {
             "rol u",
             "Using Lamps",
             "Flopsy",
-            "Pogxy"
+            "Pogxy",
+            "Capiz",
+            "Surround"
     ));
 
     //TODO: input should get also the skill name by which the comparision should be done

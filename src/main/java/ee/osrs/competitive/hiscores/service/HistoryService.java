@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class HistoryService {
@@ -23,53 +26,24 @@ public class HistoryService {
     }
 
     //TODO: make API work with any skill not only Defence.
-    private void sortUsersByDefence(ArrayList<User> users) {
-        users.sort((User user1, User user2) -> {
-            if (user1.getDefence() > user2.getDefence())
-                return -1;
-            if (user1.getDefence() < user2.getDefence())
-                return 1;
-            if (user1.getDefenceExp() > user2.getDefenceExp())
-                return -1;
-            if (user1.getDefenceExp() < user2.getDefenceExp())
-                return 1;
-            return 0;
-        });
-    }
-
-    private void sortUsersByTotal(ArrayList<User> users) {
-        users.sort((User user1, User user2) -> {
-            if (user1.getTotalLevel() > user2.getTotalLevel())
-                return -1;
-            if (user1.getTotalLevel() < user2.getTotalLevel())
-                return 1;
-            if (user1.getTotalLevelExp() > user2.getTotalLevelExp())
-                return -1;
-            if (user1.getTotalLevelExp() < user2.getTotalLevelExp())
-                return 1;
-            return 0;
-        });
-    }
-
-    //TODO: make API work with any skill not only Defence.
     public String getHiScores(ArrayList<String> names) {
-        ArrayList<User> users = new ArrayList<>();
+        TreeMap<Integer, User> users = new TreeMap<>(Comparator.reverseOrder());
         for (String name: names) {
             User user = getUser(name);
             if (user != null) {
-                users.add(getUser(name));
+                users.put(user.getDefenceExp(), user);
             }
         }
-        sortUsersByDefence(users);
-
         StringBuilder output = new StringBuilder();
 
-        for (int index = 0; index < users.size(); index++) {
+        int index = 0;
+        for (Map.Entry<Integer, User> entry : users.entrySet()) {
             output.append(index + 1).append(". ")
-                    .append(users.get(index).getUserName())
-                    .append(": lvl: ").append(users.get(index).getDefence())
-                    .append(", exp: ").append(users.get(index).getDefenceExp())
+                    .append(entry.getValue().getUserName())
+                    .append(": lvl: ").append(entry.getValue().getDefence())
+                    .append(", exp: ").append(entry.getValue().getDefenceExp())
                     .append("<br>");
+            index += 1;
         }
 
         return output.toString();
